@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Comment from './Comment';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -42,4 +42,4 @@ const CommentContainer = styled.ul`
   padding: 0;
 `;
 
-export default CommentList;
+export default React.memo(CommentList);

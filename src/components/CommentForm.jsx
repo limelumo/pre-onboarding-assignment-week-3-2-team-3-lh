@@ -1,5 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { submitNewComment, fetchPaginatedData, setComment, editComment } from '../store/comment-slice';
+import {
+  submitNewComment,
+  fetchPaginatedData,
+  setComment,
+  submitEditComment,
+  initialCommentState,
+} from '../store/comment-slice';
 import { setCurrentPage } from '../store/page-slice';
 
 import styled from 'styled-components';
@@ -18,20 +24,30 @@ function Form() {
     dispatch(setComment({ ...comment, [name]: value }));
   };
 
+  const handleEditAction = () => {
+    dispatch(submitEditComment(comment.id, comment));
+
+    if (window.confirm('수정하시겠습니까?')) {
+      dispatch(fetchPaginatedData(commentPerPage, currentPage));
+    }
+  };
+
+  const handleSubmitAction = () => {
+    dispatch(submitNewComment(comment));
+
+    if (window.confirm('등록하시겠습니까?')) {
+      dispatch(setCurrentPage(1));
+      dispatch(fetchPaginatedData(commentPerPage, currentPage));
+    }
+  };
+
   const handleSubmitComment = (e) => {
     e.preventDefault();
 
-    if (commentStatus === 'EDIT') {
-      dispatch(editComment(comment.id, comment));
-    }
+    if (commentStatus === 'EDIT') handleEditAction();
+    if (commentStatus === 'DEFAULT') handleSubmitAction();
 
-    if (commentStatus === 'DEFAULT') {
-      dispatch(submitNewComment(comment));
-      dispatch(setCurrentPage(1));
-    }
-
-    dispatch(fetchPaginatedData(commentPerPage, currentPage));
-    dispatch(setComment(''));
+    dispatch(setComment({ ...initialCommentState.comment }));
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteComment, fetchPaginatedData, fetchEditCommentData, setCommentStatus } from '../store/comment-slice';
+import { deleteComment, fetchEditCommentData, fetchPaginatedData, setCommentStatus } from '../store/comment-slice';
 import { setCurrentPage } from '../store/page-slice';
 
 import styled from 'styled-components';
