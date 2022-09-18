@@ -1,16 +1,18 @@
-import React from "react";
-import CommentListContainer from "./containers/CommentListContainer";
-import PageListContainer from "./containers/PageListContainer";
-import FormContainer from "./containers/FormContainer";
+import CommentList from './components/CommentList';
+import PageList from './components/PageList';
+import CommentForm from './components/CommentForm';
 
-function App() {
+const App = () => {
   return (
     <div>
-      <CommentListContainer />
-      <PageListContainer />
-      <FormContainer />
+      <main>
+        <CommentList />
+        <PageList />
+      </main>
+
+      <CommentForm />
     </div>
   );
-}
+};
 
 export default App;
