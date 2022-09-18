@@ -8,7 +8,7 @@ const handleCreateDate = () => {
   return getStringDate(new Date());
 };
 
-const initialCommentState = {
+export const initialCommentState = {
   totalComments: 0,
   commentList: [],
   comment: {
@@ -82,9 +82,10 @@ export const fetchPaginatedData = (commentPerPage, currentPage) => {
       });
 
       dispatch(setCommentList(data));
-      console.log('here');
     } catch (error) {
       console.error(error);
+    } finally {
+      dispatch(setCommentStatus('DEFAULT'));
     }
   };
 };
@@ -119,7 +120,7 @@ export const submitNewComment = (newComment) => {
   };
 };
 
-export const editComment = (commentId, comment) => {
+export const submitEditComment = (commentId, comment) => {
   return async (dispatch) => {
     try {
       const { data } = await Axios({
